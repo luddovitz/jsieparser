@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.ludwigreis"
+group = "luddovitz"
 version = "1.0"
 
 publishing {
