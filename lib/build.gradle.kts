@@ -8,7 +8,10 @@ version = "1.0"
 
 publishing {
     publications {
-        create<MavenPublication>("gpr") {
+        create<MavenPublication>("jsieparser") {
+            groupId = "com.ludwigreis"
+            artifactId = "jsieparser"
+            version = "1.0"
             from(components["java"])
         }
     }
