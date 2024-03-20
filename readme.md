@@ -2,13 +2,10 @@
 Java implementation of a SIE4 file reader for accounting software files in Sweden with .se extension.
 
 ## Usage
-Download the latest release and drop it into your project.
+Download the latest release and drop it into your project or import it using maven or Gradle from GitHub Packages.
 Initialize a new parser by calling the SieParser class with file as argument.
 
     SieParser sieParser = new SieParser(Path file);
-    sieParser.readFile();
-
-When readFile() method is finished you will have various accounting data available as POJOS.
 
 ## Structure
 
