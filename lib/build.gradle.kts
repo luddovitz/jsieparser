@@ -8,7 +8,7 @@ version = "1.0-SNAPSHOT"
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        register<MavenPublication>("maven") {
             groupId = "com.ludwigreis"
             artifactId = "jsieparser"
             version = "1.0"
@@ -22,10 +22,10 @@ repositories {
     mavenCentral()
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/jsieparser")
+        url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
         credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
+            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
         }
     }
 }
