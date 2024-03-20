@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.ludwigreis"
-version = "1.0"
+version = "1.41"
 
 java {
     withJavadocJar()
@@ -25,10 +25,9 @@ publishing {
     }
 
     repositories {
-        mavenCentral()
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
+            url = uri("https://maven.pkg.github.com/luddovitz/jsieparser/")
             credentials {
                 username = project.findProperty("USERNAME") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("TOKEN") as String? ?: System.getenv("TOKEN")
