@@ -1,10 +1,10 @@
 plugins {
-    id("java")
+    `java-library`
     `maven-publish`
 }
 
 group = "com.ludwigreis"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 publishing {
     publications {
