@@ -1,5 +1,6 @@
-# java-sie-parser
-Java implementation of a SIE4 file reader
+# jsieparser
+Java implementation of a SIE4 file reader for accounting software files in Sweden with .se extension.
+
 ## Usage
 Download the latest release and drop it into your project.
 Initialize a new parser by calling the SieParser class with file as argument.
