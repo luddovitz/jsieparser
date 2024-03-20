@@ -3,28 +3,31 @@ plugins {
     `maven-publish`
 }
 
-group = "luddovitz"
+group = "com.ludwigreis"
 version = "1.0"
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 publishing {
     publications {
         create<MavenPublication>("jsieparser") {
-            groupId = "com.ludwigreis"
             artifactId = "jsieparser"
-            version = "1.0"
             from(components["java"])
         }
     }
-}
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
-        credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+    repositories {
+        mavenCentral()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
+            credentials {
+                username = project.findProperty("USERNAME") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("TOKEN") as String? ?: System.getenv("TOKEN")
+            }
         }
     }
 }
