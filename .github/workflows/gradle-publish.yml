@@ -40,5 +40,6 @@ jobs:
     - name: Publish to GitHub Packages
       run: ./gradlew publish
       env:
+        GRADLE_OPTS: -Dorg.gradle.debug=true
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}

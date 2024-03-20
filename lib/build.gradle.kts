@@ -22,7 +22,7 @@ repositories {
     mavenCentral()
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/luddovitz/*")
+        url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
         credentials {
             username = project.findProperty("USERNAME") as String? ?: System.getenv("USERNAME")
             password = project.findProperty("TOKEN") as String? ?: System.getenv("TOKEN")
@@ -31,8 +31,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit:junit-bom:5.9.1")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
 }
 
 tasks.test {
