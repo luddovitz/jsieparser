@@ -22,7 +22,7 @@ repositories {
     mavenCentral()
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/luddovitz/jsieparser")
+        url = uri("https://maven.pkg.github.com/jsieparser")
         credentials {
             username = System.getenv("GITHUB_ACTOR")
             password = System.getenv("GITHUB_TOKEN")
