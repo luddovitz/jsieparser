@@ -24,8 +24,8 @@ repositories {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/luddovitz/*")
         credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            username = project.findProperty("USERNAME") as String? ?: System.getenv("USERNAME")
+            password = project.findProperty("TOKEN") as String? ?: System.getenv("TOKEN")
         }
     }
 }
