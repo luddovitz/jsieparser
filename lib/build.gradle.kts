@@ -9,7 +9,7 @@ version = "1.0-SNAPSHOT"
 publishing {
     publications {
         register<MavenPublication>("maven") {
-            groupId = "luddovitz"
+            groupId = "com.ludwigreis"
             artifactId = "jsieparser"
             version = "1.0"
 
