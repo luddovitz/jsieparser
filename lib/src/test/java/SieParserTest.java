@@ -7,6 +7,7 @@ import java.io.IOException;
 public class SieParserTest {
     @Test
     void testSieParser() throws IOException {
+
         File file = new File("src/test/java/test.se");
         SieParser sieParser = new SieParser(file.toPath());
         assert(!sieParser.getAccounts().isEmpty());

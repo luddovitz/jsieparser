@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.ludwigreis"
-version = "1.41"
+version = "1.0"
 
 java {
     withJavadocJar()

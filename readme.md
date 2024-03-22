@@ -10,14 +10,15 @@ Initialize a new parser by calling the SieParser class with file as argument.
 ## Structure
 
 **Parser**
-In a SIE4 file there is something called flags, which indicates the beginning of a certain entity. There are some various parsing rules for how these strings should be handled, so each flag has gotten their own implementation of `parse` method of a default Parser class.
+In a SIE4 file there is something called flags, which indicates the beginning of a specific entity. There are some various parsing rules for how these flags should be handled.
+Each flag has gotten their own implementation of base Parser `parse` method.
 
-A parser will return a list of corresponding pojo of that specific flag object. So using for example Ub parse it will return a List of balance, which is found under entity.
+A parser will return a list of corresponding pojo for that specific flag object. So using for example Ub parse will return `List<Balance>`.
 
 **Entity**
-Has an empty base call called Entity which all other extend. This makes it possibly to type the parser beeing using through the abstract base class of Parser.
+Empty base class called Entity. This makes it possibly to type the parser being used through the abstract base class of Parser.
 
-Other entity should represent the actual string from the SIE4 file, so for example from a #RES string in the file.
+Other entity should represent the actual string from the SIE4 file. For example a #RES flag in the file would look something like this:
 
 #RES -1 3000 -24992.00
 
@@ -27,7 +28,7 @@ Looking at the above this would be a Balance entity (POJO) that contains the fol
     private int accountNumber;  
     private BigDecimal amount;
 
-This is the implementation, but as you will see the methods inside the SieParser class takes care of this for you and will simply parse the file and return the requested data.
+This is the implementation but as you will see the methods inside the SieParser class takes care of this for you and will simply parse the file and return the requested data.
 
 ## Features
 
@@ -52,4 +53,4 @@ This corresponds to the following flags inside the SIE file:
 
 ## Development
 
-Next step is to implement a way to write an SIE file from POJO.
+Next feature is to implement a SIE file writer.

@@ -19,12 +19,26 @@ public class SieParser {
     private final Map<String, List<String>> linesByFlag = new HashMap<>();
     private final ArrayList<Voucher> vouchers = new ArrayList<>();
 
+    /**
+     * @param file
+     * A Path object representing the file in .se format to be parsed.
+     * This file should contain voucher information in a specific format.
+     * @throws IOException
+     * IOException If an I/O error occurs while reading the file, or if the file is not found.
+     */
     public SieParser(Path file) throws IOException {
+
         this.file = file;
         readFile();
     }
 
-    public void readFile() throws IOException {
+    /**
+     * Reads all the lines in the provided file and captures all parsing flags.
+     * This method is intended for internal use by the constructor and takes no arguments.
+     * @throws IOException
+     * If an I/O error occurs while reading the file, or if the file is missing.
+     */
+    private void readFile() throws IOException {
 
         Set<String> flags = Set.of("#RES", "#UB", "#IB", "#RAR", "#KONTO", "#SIETYP", "#ORGNR", "#FNAMN");
         List<String> voucherLines = new ArrayList<>();
@@ -61,12 +75,19 @@ public class SieParser {
         }
     }
 
-    void createVoucher(List<String> lines) {
+    /**
+     * Parses a list of strings representing voucher information to create Voucher objects.
+     * Voucher information is expected to be in a specific format where voucher flags ("#VER")
+     * are followed by voucher transactions ("#TRANS").
+     * @param lines
+     * A list of strings representing the lines to parse for voucher information.
+     */
+    private void createVoucher(List<String> lines) {
+
         AtomicReference<Voucher> voucher = new AtomicReference<>(new Voucher());
         lines.forEach(line -> {
             String[] parts;
             if (line.startsWith("#VER")) {
-                System.out.println("Processing line: " + line);
                 parts = line.split(" (?=([^\"]*\"[^\"]*\")*[^\"]*$)", 7);
                 voucher.get().setVoucherSeries(parts[1].replaceAll("^\"|\"$", ""));
                 voucher.get().setVoucherNumber(parts[2].replaceAll("^\"|\"$", ""));
@@ -87,35 +108,42 @@ public class SieParser {
     }
 
     public List<Account> getAccounts() {
+
         Parser<Account> parser = new Konto();
         return parser.parse(linesByFlag.get(parser.getFlag()));
     }
 
-    public List<Voucher> getVouchers() {
+    public List<Voucher> getVouchers()
+    {
         return this.vouchers;
     }
 
     public List<FinancialYear> getFinancialYears() {
+
         Parser<FinancialYear> parser = new Rar();
         return parser.parse(linesByFlag.get(parser.getFlag()));
     }
 
     public List<Balance> getIncomeStatement() {
+
         Parser<Balance> parser = new Res();
         return parser.parse(linesByFlag.get(parser.getFlag()));
     }
 
     public List<Balance> getOpeningBalances() {
+
         Parser<Balance> parser = new Ib();
         return parser.parse(linesByFlag.get(parser.getFlag()));
     }
 
     public List<Balance> getClosingBalances() {
+
         Parser<Balance> parser = new Ub();
         return parser.parse(linesByFlag.get(parser.getFlag()));
     }
 
     public Meta getMetaData() {
+
         Meta meta = new Meta();
 
         if (linesByFlag.containsKey("#FNAMN")) {
