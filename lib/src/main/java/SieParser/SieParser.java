@@ -97,7 +97,7 @@ public class SieParser {
             }
             if (line.startsWith("#TRANS")) {
                 Transaction transaction = new Transaction();
-                parts = line.split(" ", 6);
+                parts = line.replaceAll("\\{.*?}", "").split(" ");
                 transaction.setAccountNumber(Integer.parseInt(parts[1]));
                 transaction.setAmount(new BigDecimal(parts[3]));
                 transaction.setLineDescription("");
