@@ -48,6 +48,7 @@ public class SieParser {
             List<String> lines = linesStream.map(String::strip).toList();
 
             for (String line : lines) {
+
                 boolean flagFound = flags.stream().anyMatch(line::startsWith);
 
                 if (flagFound) {
