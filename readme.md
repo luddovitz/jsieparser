@@ -1,38 +1,42 @@
 # jsieparser
-Java implementation of a SIE4 file reader for accounting software files in Sweden with .se extension.
+Jsieparser is a Java library designed to read SIE4 files commonly used in accounting software in Sweden, identified by
+the .se extension. With jsieparser, you can effortlessly parse SIE files, extract relevant data, and integrate it into your projects.
 
 ## Usage
-Download the latest release and drop it into your project or import it using maven or Gradle from GitHub Packages.
-Initialize a new parser by calling the SieParser class with file as argument.
+To get started, simply download the latest release of jsieparser and incorporate it into your project. You can either
+manually add it or import it via Maven or Gradle from GitHub Packages. Initialize a new parser by invoking the SieParser
+class with the file path as an argument.
 
     SieParser sieParser = new SieParser(Path file);
 
 ## Structure
 
-**Parser**
-In a SIE4 file there is something called flags, which indicates the beginning of a specific entity. There are some various parsing rules for how these flags should be handled.
-Each flag has gotten their own implementation of base Parser `parse` method.
+### Parser
+In a SIE4 file, there are flags indicating the beginning of specific entities. Each flag has its own parsing rules, and
+jsieparser provides implementations for these rules. Each flag corresponds to a specific entity, and parsing is performed
+based on these entities.
 
-A parser will return a list of corresponding pojo for that specific flag object. So using for example Ub parse will return `List<Balance>`.
+### Entity
+The base class Entity acts as a foundation for all entities parsed from the SIE4 file. For example, a #RES flag in the
+SIE4 file represents a balance entity. The corresponding POJO (Plain Old Java Object) for this entity would include
+properties such as financial year, account number, and amount.
 
-**Entity**
-Empty base class called Entity. This makes it possibly to type the parser being used through the abstract base class of Parser.
+Other entity should represent the actual string from the SIE4 file. For example a #RES flag in the raw file would look
+something like this:
 
-Other entity should represent the actual string from the SIE4 file. For example a #RES flag in the file would look something like this:
-
+``` text
 #RES -1 3000 -24992.00
+```
 
-Looking at the above this would be a Balance entity (POJO) that contains the following properties:
+This would correspond to a Balance entity (POJO) with the following properties:
 
     private int financialYear;  
     private int accountNumber;  
     private BigDecimal amount;
 
-This is the implementation but as you will see the methods inside the SieParser class takes care of this for you and will simply parse the file and return the requested data.
-
 ## Features
 
-The following list of methods can be called on SieParser:
+The following list of methods can be called on SieParser to extract data:
 
 - getAccounts();
 - getVouchers();
@@ -41,15 +45,7 @@ The following list of methods can be called on SieParser:
 - getOpeningBalances();
 - getClosingBalances();
 
-This corresponds to the following flags inside the SIE file:
-
-- #RES
-- #UB
-- #IB
-- #RAR
-- #KONTO
-- #TRANS
-- #VER
+These methods corresponds to the flags found within SIE files, providing a convenient way to access specific data.
 
 ## Development
 
